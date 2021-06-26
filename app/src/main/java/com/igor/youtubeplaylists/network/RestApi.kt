@@ -1,10 +1,10 @@
 package com.igor.youtubeplaylists.network
 
-import okhttp3.ResponseBody
+import com.igor.youtubeplaylists.modules.YoutubePlaylistsResponse
 import retrofit2.http.GET
 
 interface RestApi {
 
     @GET("youtube/playlists.json")
-    suspend fun getAllCities(): ResponseBody
+    suspend fun getAllCities(): YoutubePlaylistsResponse
 }

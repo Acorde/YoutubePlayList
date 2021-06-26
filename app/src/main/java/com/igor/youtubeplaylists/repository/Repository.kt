@@ -1,16 +1,15 @@
 package com.igor.youtubeplaylists.repository
 
-import android.util.Log
-import com.google.gson.Gson
+import com.igor.youtubeplaylists.modules.YoutubePlaylistsResponse
 import com.igor.youtubeplaylists.network.RestApi
 import com.igor.youtubeplaylists.network.ResultWrapper
 
 class Repository(private val restApi: RestApi) {
 
-    suspend fun getYoutubePlayList() {
-        try {
+    suspend fun getYoutubePlayList(): ResultWrapper<YoutubePlaylistsResponse?> {
+        return try {
             val response = restApi.getAllCities()
-            Log.d("IgorTest", Gson().toJson(response))
+            ResultWrapper.Success(response)
 
         } catch (ex: Exception) {
             ResultWrapper.Error(ex)
