@@ -1,13 +1,11 @@
 package com.igor.youtubeplaylists.ui.playlists.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.igor.youtubeplaylists.R
+import com.igor.youtubeplaylists.databinding.ItemPalyListsBinding
 import com.igor.youtubeplaylists.modules.ItemsItem
 import com.igor.youtubeplaylists.utils.showWithView
-import kotlinx.android.synthetic.main.item_paly_lists.view.*
 import javax.inject.Inject
 
 class PlayListsAdapter @Inject constructor() :
@@ -16,6 +14,8 @@ class PlayListsAdapter @Inject constructor() :
     private var playLists: List<ItemsItem?>? = null
     private var mOnItemClick: ((ItemsItem) -> Unit)? = null
 
+    private var _binding: ItemPalyListsBinding? = null
+    private val binding get() = _binding!!
 
     fun setData(data: List<ItemsItem?>) {
         this.playLists = data
@@ -27,9 +27,11 @@ class PlayListsAdapter @Inject constructor() :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return LayoutInflater.from(parent.context).inflate(R.layout.item_paly_lists, parent, false)
+        _binding = ItemPalyListsBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+
+        return _binding!!.root
             .let {
-                ViewHolder(it)
+                ViewHolder(binding)
             }
     }
 
@@ -51,7 +53,8 @@ class PlayListsAdapter @Inject constructor() :
         return playLists?.size ?: 0
     }
 
-    class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class ViewHolder(private val itemBinding: ItemPalyListsBinding) :
+        RecyclerView.ViewHolder(itemBinding.root) {
         fun bindData(data: ItemsItem) {
             setTitle(data.snippet?.title)
             setDate(data.snippet?.publishedAt)
@@ -59,16 +62,18 @@ class PlayListsAdapter @Inject constructor() :
         }
 
         private fun setDate(publishedAt: String?) {
-            itemView.item_playlists_date.showWithView(publishedAt?.isEmpty()?.not() == true)
+            itemBinding.itemPlaylistsDate.showWithView(publishedAt?.isEmpty()?.not() == true).let {
+
+            }
             publishedAt?.let { title ->
-                itemView.item_playlists_date.text = title
+                itemBinding.itemPlaylistsDate.text = title
             }
         }
 
         private fun setTitle(title: String?) {
-            itemView.item_playlists_name.showWithView(title?.isEmpty()?.not() == true)
+            itemBinding.itemPlaylistsName.showWithView(title?.isEmpty()?.not() == true)
             title?.let { title ->
-                itemView.item_playlists_name.text = title
+                itemBinding.itemPlaylistsName.text = title
             }
         }
     }

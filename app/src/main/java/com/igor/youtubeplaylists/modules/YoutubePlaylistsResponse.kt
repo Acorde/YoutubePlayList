@@ -1,8 +1,11 @@
 package com.igor.youtubeplaylists.modules
 
+import android.os.Parcelable
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class YoutubePlaylistsResponse(
 
 	@SerializedName("kind")
@@ -20,8 +23,9 @@ data class YoutubePlaylistsResponse(
 	@SerializedName("items")
 	@Expose
 	val items: List<ItemsItem?>? = null
-)
+) : Parcelable
 
+@Parcelize
 data class PageInfo(
 
 	@SerializedName("totalResults")
@@ -31,8 +35,9 @@ data class PageInfo(
 	@SerializedName("resultsPerPage")
 	@Expose
 	val resultsPerPage: Int? = null
-)
+) : Parcelable
 
+@Parcelize
 data class Snippet(
 
 	@SerializedName("playlistId")
@@ -70,8 +75,9 @@ data class Snippet(
 	@SerializedName("channelTitle")
 	@Expose
 	val channelTitle: String? = null
-)
+) : Parcelable
 
+@Parcelize
 data class Medium(
 
 	@SerializedName("width")
@@ -85,8 +91,9 @@ data class Medium(
 	@SerializedName("height")
 	@Expose
 	val height: Int? = null
-)
+) : Parcelable
 
+@Parcelize
 data class Localized(
 
 	@SerializedName("description")
@@ -96,8 +103,9 @@ data class Localized(
 	@SerializedName("title")
 	@Expose
 	val title: String? = null
-)
+) : Parcelable
 
+@Parcelize
 data class JsonMemberDefault(
 
 	@SerializedName("width")
@@ -111,8 +119,9 @@ data class JsonMemberDefault(
 	@SerializedName("height")
 	@Expose
 	val height: Int? = null
-)
+) : Parcelable
 
+@Parcelize
 data class Thumbnails(
 
 	@SerializedName("standard")
@@ -134,8 +143,9 @@ data class Thumbnails(
 	@SerializedName("medium")
 	@Expose
 	val medium: Medium? = null
-)
+) : Parcelable
 
+@Parcelize
 data class ContentDetails(
 
 	@SerializedName("itemCount")
@@ -149,8 +159,9 @@ data class ContentDetails(
 	@SerializedName("videoId")
 	@Expose
 	val videoId: String? = null
-)
+) : Parcelable
 
+@Parcelize
 data class High(
 
 	@SerializedName("width")
@@ -164,8 +175,9 @@ data class High(
 	@SerializedName("height")
 	@Expose
 	val height: Int? = null
-)
+) : Parcelable
 
+@Parcelize
 data class ItemsItem(
 
 	@SerializedName("snippet")
@@ -191,8 +203,9 @@ data class ItemsItem(
 	@SerializedName("contentDetails")
 	@Expose
 	val contentDetails: ContentDetails? = null
-)
+) : Parcelable
 
+@Parcelize
 data class ResourceId(
 
 	@SerializedName("kind")
@@ -202,8 +215,9 @@ data class ResourceId(
 	@SerializedName("videoId")
 	@Expose
 	val videoId: String? = null
-)
+) : Parcelable
 
+@Parcelize
 data class Maxres(
 
 	@SerializedName("width")
@@ -217,8 +231,9 @@ data class Maxres(
 	@SerializedName("height")
 	@Expose
 	val height: Int? = null
-)
+) : Parcelable
 
+@Parcelize
 data class Standard(
 
 	@SerializedName("width")
@@ -232,8 +247,9 @@ data class Standard(
 	@SerializedName("height")
 	@Expose
 	val height: Int? = null
-)
+) : Parcelable
 
+@Parcelize
 data class PlaylistItems(
 
 	@SerializedName("kind")
@@ -255,4 +271,4 @@ data class PlaylistItems(
 	@SerializedName("items")
 	@Expose
 	val items: List<ItemsItem?>? = null
-)
+) : Parcelable

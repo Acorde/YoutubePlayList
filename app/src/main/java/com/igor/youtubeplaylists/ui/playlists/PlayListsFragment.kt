@@ -8,14 +8,13 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
-import com.igor.youtubeplaylists.R
+import com.igor.youtubeplaylists.databinding.FragmentPlayListsBinding
 import com.igor.youtubeplaylists.modules.ItemsItem
 import com.igor.youtubeplaylists.modules.YoutubePlaylistsResponse
 import com.igor.youtubeplaylists.network.ResultWrapper
 import com.igor.youtubeplaylists.ui.playlists.adapter.PlayListsAdapter
 import com.igor.youtubeplaylists.utils.showWithView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_play_lists.*
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -24,13 +23,18 @@ class PlayListsFragment : Fragment() {
     @Inject
     lateinit var adapter: PlayListsAdapter
 
+    private var _binding: FragmentPlayListsBinding? = null
+    private val binding get() = _binding!!
+
     private val viewModel: PlayListsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_play_lists, container, false)
+        _binding = FragmentPlayListsBinding.inflate(inflater, container, false)
+
+        return _binding!!.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -42,15 +46,15 @@ class PlayListsFragment : Fragment() {
     }
 
     private fun getPlayLists() {
-        play_lists_progress_bar.showWithView(true)
+        binding.playListsProgressBar.showWithView(true)
         viewModel.getPlayLists()
     }
 
     private fun setRecyclerView() {
         context?.let { context ->
-            play_lists_rv.layoutManager =
+            binding.playListsRv.layoutManager =
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
-            play_lists_rv.adapter = adapter
+            binding.playListsRv.adapter = adapter
 
             adapter.setOnItemClick {
                 viewModel.onPlaylistItemClicked(it)
@@ -67,7 +71,7 @@ class PlayListsFragment : Fragment() {
 
     private fun subscribeObservers() {
         viewModel.playListsData.observe(viewLifecycleOwner, { result ->
-            play_lists_progress_bar.showWithView(false)
+            binding.playListsProgressBar.showWithView(false)
             when (result) {
                 is ResultWrapper.Success -> setRecyclerViewData((result.data as YoutubePlaylistsResponse).items)
                 is ResultWrapper.Error -> view?.let {

@@ -9,10 +9,21 @@
         android:id="@+id/playListsFragment"
         android:name="com.igor.youtubeplaylists.ui.playlists.PlayListsFragment"
         android:label="fragment_play_lists"
-        tools:layout="@layout/fragment_play_lists" />
+        tools:layout="@layout/fragment_play_lists">
+        <action
+            android:id="@+id/action_playListsFragment_to_playListFragment"
+            app:destination="@id/playListFragment"
+            app:popUpToInclusive="false" />
+    </fragment>
     <fragment
         android:id="@+id/playListFragment"
         android:name="com.igor.youtubeplaylists.ui.playlist.PlayListFragment"
         android:label="fragment_play_list"
-        tools:layout="@layout/fragment_play_list" />
+        tools:layout="@layout/fragment_play_list">
+        <argument
+            android:name="extra_selected_itemsItem"
+            app:argType="com.igor.youtubeplaylists.modules.ItemsItem[]"
+            />
+
+    </fragment>
 </navigation>
