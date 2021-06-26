@@ -53,7 +53,7 @@ class PlayListsFragment : Fragment() {
             play_lists_rv.adapter = adapter
 
             adapter.setOnItemClick {
-                //TODO... handle onClick
+                viewModel.onPlaylistItemClicked(it)
             }
         }
     }

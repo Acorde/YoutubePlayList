@@ -10,4 +10,9 @@
         android:name="com.igor.youtubeplaylists.ui.playlists.PlayListsFragment"
         android:label="fragment_play_lists"
         tools:layout="@layout/fragment_play_lists" />
+    <fragment
+        android:id="@+id/playListFragment"
+        android:name="com.igor.youtubeplaylists.ui.playlist.PlayListFragment"
+        android:label="fragment_play_list"
+        tools:layout="@layout/fragment_play_list" />
 </navigation>

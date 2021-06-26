@@ -3,6 +3,7 @@ package com.igor.youtubeplaylists.ui.playlists
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.igor.youtubeplaylists.modules.ItemsItem
 import com.igor.youtubeplaylists.modules.YoutubePlaylistsResponse
 import com.igor.youtubeplaylists.network.ResultWrapper
 import com.igor.youtubeplaylists.repository.Repository
@@ -19,6 +20,12 @@ class PlayListsViewModel @Inject constructor(private val mRepository: Repository
         viewModelScope.launch {
             val data = mRepository.getYoutubePlayList()
             playListsData.value = data
+        }
+    }
+
+    fun onPlaylistItemClicked(item: ItemsItem) {
+        item.playlistItems?.let {
+
         }
     }
 
