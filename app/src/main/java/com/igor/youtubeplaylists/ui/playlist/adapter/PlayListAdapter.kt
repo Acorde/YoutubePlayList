@@ -1,19 +1,18 @@
-package com.igor.youtubeplaylists.ui.playlists.adapter
+package com.igor.youtubeplaylists.ui.playlist.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.igor.youtubeplaylists.databinding.ItemPalyListsBinding
 import com.igor.youtubeplaylists.modules.ItemsItem
-import com.igor.youtubeplaylists.modules.PlaylistItems
 import com.igor.youtubeplaylists.utils.showWithView
 import javax.inject.Inject
 
-class PlayListsAdapter @Inject constructor() :
-    RecyclerView.Adapter<PlayListsAdapter.ViewHolder>() {
+class PlayListAdapter @Inject constructor() :
+    RecyclerView.Adapter<PlayListAdapter.ViewHolder>() {
 
     private var playLists: List<ItemsItem?>? = null
-    private var mOnItemClick: ((PlaylistItems) -> Unit)? = null
+    private var mOnItemClick: ((ItemsItem) -> Unit)? = null
 
     private var _binding: ItemPalyListsBinding? = null
     private val binding get() = _binding!!
@@ -23,7 +22,7 @@ class PlayListsAdapter @Inject constructor() :
         notifyDataSetChanged()
     }
 
-    fun setOnItemClick(onItemClick: (PlaylistItems) -> Unit) {
+    fun setOnItemClick(onItemClick: (ItemsItem) -> Unit) {
         this.mOnItemClick = onItemClick
     }
 
@@ -42,9 +41,7 @@ class PlayListsAdapter @Inject constructor() :
                 holder.bindData(item)
                 holder.itemView.setOnClickListener {
                     mOnItemClick?.let { onItemClick ->
-                        item.playlistItems?.let {
-                            onItemClick.invoke(item.playlistItems)
-                        }
+                        onItemClick.invoke(item)
                     }
                 }
             }

@@ -22,7 +22,7 @@
         tools:layout="@layout/fragment_play_list">
         <argument
             android:name="extra_selected_itemsItem"
-            app:argType="com.igor.youtubeplaylists.modules.ItemsItem[]"
+            app:argType="com.igor.youtubeplaylists.modules.PlaylistItems"
             />
 
     </fragment>

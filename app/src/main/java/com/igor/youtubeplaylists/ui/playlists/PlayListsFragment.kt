@@ -6,8 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
+import com.igor.youtubeplaylists.R
 import com.igor.youtubeplaylists.databinding.FragmentPlayListsBinding
 import com.igor.youtubeplaylists.modules.ItemsItem
 import com.igor.youtubeplaylists.modules.YoutubePlaylistsResponse
@@ -56,8 +58,19 @@ class PlayListsFragment : Fragment() {
                 LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             binding.playListsRv.adapter = adapter
 
-            adapter.setOnItemClick {
-                viewModel.onPlaylistItemClicked(it)
+            adapter.setOnItemClick { selectedPlayList ->
+                // viewModel.onPlaylistItemClicked(it)
+                activity?.let {
+                    val navHostFragment =
+                        it.supportFragmentManager.findFragmentById(R.id.main_container) as NavHostFragment
+                    navHostFragment.navController.let { navController ->
+                        navController.navigate(
+                            PlayListsFragmentDirections.actionPlayListsFragmentToPlayListFragment(
+                                selectedPlayList
+                            )
+                        )
+                    }
+                }
             }
         }
     }
