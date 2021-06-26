@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import com.igor.youtubeplaylists.R
 import com.igor.youtubeplaylists.modules.ItemsItem
 import com.igor.youtubeplaylists.modules.YoutubePlaylistsResponse
@@ -69,6 +70,13 @@ class PlayListsFragment : Fragment() {
             play_lists_progress_bar.showWithView(false)
             when (result) {
                 is ResultWrapper.Success -> setRecyclerViewData((result.data as YoutubePlaylistsResponse).items)
+                is ResultWrapper.Error -> view?.let {
+                    Snackbar.make(
+                        it,
+                        result.exception.message ?: "Error",
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
             }
 
         })
