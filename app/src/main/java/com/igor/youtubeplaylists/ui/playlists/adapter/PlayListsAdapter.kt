@@ -35,8 +35,13 @@ class PlayListsAdapter @Inject constructor() :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         playLists?.let { list ->
-            list[position]?.let {
-                holder.bindData(it)
+            list[position]?.let { item ->
+                holder.bindData(item)
+                holder.itemView.setOnClickListener {
+                    mOnItemClick?.let { onItemClick ->
+                        onItemClick.invoke(item)
+                    }
+                }
             }
         }
     }
