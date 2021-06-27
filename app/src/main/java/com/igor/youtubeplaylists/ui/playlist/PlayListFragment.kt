@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.igor.youtubeplaylists.databinding.FragmentPlayListBinding
 import com.igor.youtubeplaylists.modules.ItemsItem
 import com.igor.youtubeplaylists.modules.PlaylistItems
@@ -67,7 +68,8 @@ class PlayListFragment : Fragment() {
     private fun setRecyclerView() {
         context?.let { context ->
             binding.playListRv.layoutManager =
-                LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
+                //LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             binding.playListRv.adapter = adapter
 
 //            adapter.setOnItemClick { selectedPlayList ->
