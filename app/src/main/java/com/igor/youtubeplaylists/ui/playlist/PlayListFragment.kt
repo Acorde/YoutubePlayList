@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.igor.youtubeplaylists.databinding.FragmentPlayListBinding
 import com.igor.youtubeplaylists.modules.ItemsItem
@@ -60,7 +59,7 @@ class PlayListFragment : Fragment() {
 
     private fun setRecyclerViewData(playLists: List<ItemsItem?>?) {
         playLists?.let {
-            adapter?.setData(it)
+            adapter.setData(it)
         }
 
     }
@@ -69,23 +68,10 @@ class PlayListFragment : Fragment() {
         context?.let { context ->
             binding.playListRv.layoutManager =
                 StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-                //LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             binding.playListRv.adapter = adapter
-
-//            adapter.setOnItemClick { selectedPlayList ->
-//                // viewModel.onPlaylistItemClicked(it)
-//                activity?.let {
-//                    val navHostFragment =
-//                        it.supportFragmentManager.findFragmentById(R.id.main_container) as NavHostFragment
-//                    navHostFragment.navController.let { navController ->
-//                        navController.navigate(
-//                            PlayListsFragmentDirections.actionPlayListsFragmentToPlayListFragment(
-//                                selectedPlayList
-//                            )
-//                        )
-//                    }
-//                }
-//            }
+            adapter.setOnItemClick {
+                viewModel.playVideo(it)
+            }
         }
     }
 }
