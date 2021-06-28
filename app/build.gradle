@@ -38,11 +38,17 @@ android {
     buildFeatures {
         viewBinding true
     }
+
+    defaultConfig {
+        buildConfigField "String", "YOUTUBE_API_KEY", "\"AIzaSyD5dhWbtqzgOe8GLpaXIRCP4NVtJYs0oUI\""
+    }
+
 }
 
 dependencies {
 
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation files('libs/YouTubeAndroidPlayerApi.jar')
     def hilt_version = "2.37"
     def retrofit_version = "2.9.0"
     def gson_version = "2.8.7"

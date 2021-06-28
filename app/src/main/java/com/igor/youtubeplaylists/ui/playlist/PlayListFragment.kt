@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.igor.youtubeplaylists.databinding.FragmentPlayListBinding
 import com.igor.youtubeplaylists.modules.ItemsItem
 import com.igor.youtubeplaylists.modules.PlaylistItems
 import com.igor.youtubeplaylists.ui.playlist.adapter.PlayListAdapter
+import com.igor.youtubeplaylists.ui.youtube.YoutubePlayerActivity
 import com.igor.youtubeplaylists.utils.showWithView
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -19,7 +19,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class PlayListFragment : Fragment() {
     private val args: PlayListFragmentArgs by navArgs()
-    private val viewModel: PlayListViewModel by viewModels()
 
     private var _binding: FragmentPlayListBinding? = null
     private val binding get() = _binding!!
@@ -69,8 +68,13 @@ class PlayListFragment : Fragment() {
             binding.playListRv.layoutManager =
                 StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
             binding.playListRv.adapter = adapter
-            adapter.setOnItemClick {
-                viewModel.playVideo(it)
+            adapter.setOnItemClick { selectedVideoId ->
+                activity?.let { activity ->
+                    YoutubePlayerActivity.navigateToYoutubeActivity(
+                        activity,
+                        selectedVideoId
+                    )
+                }
             }
         }
     }

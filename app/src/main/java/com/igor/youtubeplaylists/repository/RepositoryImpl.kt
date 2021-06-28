@@ -3,10 +3,11 @@ package com.igor.youtubeplaylists.repository
 import com.igor.youtubeplaylists.modules.YoutubePlaylistsResponse
 import com.igor.youtubeplaylists.network.RestApi
 import com.igor.youtubeplaylists.network.ResultWrapper
+import javax.inject.Inject
 
-class Repository(private val restApi: RestApi) {
+class RepositoryImpl @Inject constructor(private val restApi: RestApi) : RepositoryController {
 
-    suspend fun getYoutubePlayList(): ResultWrapper<YoutubePlaylistsResponse?> {
+    override suspend fun getYoutubePlayList(): ResultWrapper<YoutubePlaylistsResponse?> {
         return try {
             val response = restApi.getAllCities()
             ResultWrapper.Success(response)

@@ -6,13 +6,13 @@ import androidx.lifecycle.viewModelScope
 import com.igor.youtubeplaylists.modules.ItemsItem
 import com.igor.youtubeplaylists.modules.YoutubePlaylistsResponse
 import com.igor.youtubeplaylists.network.ResultWrapper
-import com.igor.youtubeplaylists.repository.Repository
+import com.igor.youtubeplaylists.repository.RepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PlayListsViewModel @Inject constructor(private val mRepository: Repository) : ViewModel() {
+class PlayListsViewModel @Inject constructor(private val mRepository: RepositoryImpl) : ViewModel() {
 
     var playListsData: MutableLiveData<ResultWrapper<YoutubePlaylistsResponse?>> = MutableLiveData()
 

@@ -13,7 +13,7 @@ class PlayListAdapter @Inject constructor() :
     RecyclerView.Adapter<PlayListAdapter.ViewHolder>() {
 
     private var playLists: List<ItemsItem?>? = null
-    private var mOnItemClick: ((ItemsItem) -> Unit)? = null
+    private var mOnItemClick: ((String) -> Unit)? = null
 
     private var _binding: ItemPalyListBinding? = null
     private val binding get() = _binding!!
@@ -23,7 +23,7 @@ class PlayListAdapter @Inject constructor() :
         notifyDataSetChanged()
     }
 
-    fun setOnItemClick(onItemClick: (ItemsItem) -> Unit) {
+    fun setOnItemClick(onItemClick: (String) -> Unit) {
         this.mOnItemClick = onItemClick
     }
 
@@ -42,7 +42,12 @@ class PlayListAdapter @Inject constructor() :
                 holder.bindData(item)
                 holder.itemView.setOnClickListener {
                     mOnItemClick?.let { onItemClick ->
-                        onItemClick.invoke(item)
+                        item.contentDetails?.videoId?.let { videoId ->
+                            if (videoId.isEmpty().not()) {
+                                onItemClick.invoke(videoId)
+                            }
+                        }
+
                     }
                 }
             }

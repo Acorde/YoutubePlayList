@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph.xml"
-    app:startDestination="@id/playListsFragment">
+    app:startDestination="@+id/playListsFragment"
+    >
 
     <fragment
         android:id="@+id/playListsFragment"
@@ -22,8 +23,7 @@
         tools:layout="@layout/fragment_play_list">
         <argument
             android:name="extra_selected_itemsItem"
-            app:argType="com.igor.youtubeplaylists.modules.PlaylistItems"
-            />
+            app:argType="com.igor.youtubeplaylists.modules.PlaylistItems" />
 
     </fragment>
 </navigation>
