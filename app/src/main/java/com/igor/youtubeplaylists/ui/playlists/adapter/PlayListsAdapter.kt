@@ -3,9 +3,11 @@ package com.igor.youtubeplaylists.ui.playlists.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.igor.youtubeplaylists.R
 import com.igor.youtubeplaylists.databinding.ItemPalyListsBinding
 import com.igor.youtubeplaylists.modules.ItemsItem
 import com.igor.youtubeplaylists.modules.PlaylistItems
+import com.igor.youtubeplaylists.utils.parseDateToddMMyyyy
 import com.igor.youtubeplaylists.utils.showWithView
 import javax.inject.Inject
 
@@ -68,8 +70,9 @@ class PlayListsAdapter @Inject constructor() :
             itemBinding.itemPlaylistsDate.showWithView(publishedAt?.isEmpty()?.not() == true).let {
 
             }
-            publishedAt?.let { title ->
-                itemBinding.itemPlaylistsDate.text = title
+            publishedAt?.let { date ->
+                itemBinding.itemPlaylistsDate.text =
+                    itemView.context.getString(R.string.published_date, date.parseDateToddMMyyyy())
             }
         }
 
