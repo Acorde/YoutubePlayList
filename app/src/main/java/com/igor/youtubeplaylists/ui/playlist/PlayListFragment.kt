@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.igor.youtubeplaylists.databinding.FragmentPlayListBinding
 import com.igor.youtubeplaylists.modules.ItemsItem
@@ -64,18 +65,18 @@ class PlayListFragment : Fragment() {
     }
 
     private fun setRecyclerView() {
-        context?.let { context ->
-            binding.playListRv.layoutManager =
-                StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
-            binding.playListRv.adapter = adapter
-            adapter.setOnItemClick { selectedVideoId ->
-                activity?.let { activity ->
-                    YoutubePlayerActivity.navigateToYoutubeActivity(
-                        activity,
-                        selectedVideoId
-                    )
-                }
+
+        binding.playListRv.layoutManager =
+            StaggeredGridLayoutManager(2, GridLayoutManager.VERTICAL)
+        binding.playListRv.adapter = adapter
+        adapter.setOnItemClick { selectedVideoId ->
+            activity?.let { activity ->
+                YoutubePlayerActivity.navigateToYoutubeActivity(
+                    activity,
+                    selectedVideoId
+                )
             }
         }
+
     }
 }
